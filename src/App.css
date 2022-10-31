@@ -4,3 +4,31 @@
   height: 100vh;
   width: 100vw;
 }
+
+.Header{
+  height: 20vh;
+  width: 100vw;
+  background-color: red;
+  margin-bottom: 5vh;
+}
+
+.rowOne {
+  height: 35vh;
+  width: 100vw;
+  background-color: blue;
+  margin-bottom: 5vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.rowTwo {
+  background-color: green;
+  height: 33vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}

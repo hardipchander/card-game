@@ -1,6 +1,15 @@
 .Actual-Card {
+    background-color: red;
+    height: 80%;
+    width: 10%;
+    font-size: 5vw;
+}
+
+.Hidden  {
     background-color: black;
     height: 80%;
     width: 10%;
     font-size: 5vw;
 }
+
+

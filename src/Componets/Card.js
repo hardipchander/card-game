@@ -9,12 +9,25 @@ class Card extends React.Component {
         };
     }
 
+    pressedCard=() => {
+        this.setState(state => ({isFlipped: !state.isFlipped}));
+    };
+
     render() {
-        return (
-            <div className='Actual-Card'>
-                <p>#{this.props.number}</p>
-            </div>
-        );
+        if(this.state.isFlipped===false) {
+            return (
+                <div className="Hidden" onClick={this.pressedCard}>
+                    <p></p>
+                </div>
+            );
+        }
+        else {
+            return (
+                <div className='Actual-Card' onClick={this.pressedCard}>
+                    <p>#{this.props.number}</p>
+                </div>
+            );
+        }
     }
 }
 

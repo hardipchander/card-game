@@ -1,31 +1,24 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import App from '../App';
 import '../Styles/Card.css';
 
 class Card extends React.Component {
     constructor(props){
         super(props);
-        this.state={
-            isFlipped: true,  
-        };
+        this.state={};
     }
 
-    pressed=()=> {
-        this.setState( prevState =>({isFlipped : !prevState.isFlipped}));
-    };
-    
-
     render() {
-        if(this.state.isFlipped===false) {
+        if(this.props.show===false) {
             return (
-                <div className="Hidden" onClick={this.pressed}>
+                <div className="Hidden" onClick={this.props.action}>
                     <p></p>
                 </div>
             );
         }
         else {
             return (
-                <div className='Actual-Card' onClick={this.pressed}>
+                <div className='Actual-Card' onClick={this.props.action}>
                     <p>#{this.props.number}</p>
                 </div>
             );

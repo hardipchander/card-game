@@ -5,8 +5,9 @@ import Card from './Componets/Card';
 function App() {
   // Add state for storing information about the game with use state hook
   const [numsForCards, setCards]=useState([1,2,3,4,1,2,3,4].sort(()=> Math.random() -0.5));
-  const [shown, setShown]=useState([true,false,false,false,false,false,true,false]);
+  const [shown, setShown]=useState([false,false,false,false,false,false,false,false]);
   const [numChosen, setNumChosen]=useState(0);
+  const [playerWon, setWon]=useState(false);
 
   function onHandleReshuffle() {
     // Randomize with Math random method
@@ -15,14 +16,34 @@ function App() {
 
     // Need to cover all the cards when reshuffling is needed
     setShown([false,false,false,false,false,false,false,false]);
+
+    // Reset game state
+    setNumChosen(0);
+    setWon(false);
   }
 
-  // Function to deal with when card is pressed
+  // Function to deal with when card is pressed and pass into the Card componet as a prop
   function onPressed(id) {
-    const newShown=[...shown];
-    newShown[id]=!newShown[id];
-    setShown(newShown);
+    if(shown[id]===false && numChosen<2) {
+      const newShown=[...shown];
+      newShown[id]=!newShown[id];
+      setShown(newShown);
+      setNumChosen(prevNumber=> prevNumber+1);
+    }
+    else if(shown[id]===true) {
+      const newShown=[...shown];
+      newShown[id]=!newShown[id];
+      setShown(newShown);
+      setNumChosen(prevNumber=> prevNumber-1);
+    }
+    
   }
+
+  useEffect(function() {
+    if(numChosen===2) {
+      console.log("Have a match")
+    }
+  }, [numChosen])
 
   return (
     <div className="App">

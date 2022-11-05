@@ -58,6 +58,11 @@ function App() {
 
   // Use this for comparing cards
   useEffect(function() {
+    // Check if all cards are untouchable meaning the user has won 
+    if(untouchable[0]===true && untouchable[1]===true && untouchable[2]===true && untouchable[3]===true && untouchable[4]===true && untouchable[5]===true && untouchable[6]===true && untouchable[7]===true) {
+      console.log("Player has won");
+      setWon(true);
+    }
     if(numChosen===2) {
       // Time to compare the cards
       if(cardOne>-1 && cardTwo>-1) {
@@ -90,28 +95,44 @@ function App() {
     }
   }, [numChosen])
 
-  return (
-    <div className="App">
-      <div className="Header">
-        <h1 className='title'>A picture is worth a thousand words, but a memory is priceless</h1>
-        <button className='buttonReset' onClick={onHandleReshuffle}>Reshuffle</button>
-      </div>
-      
-      <div className='rowOne'>
-        <Card number={numsForCards[0]} id={numsForCards[0]} action={() => onPressed(0)} show={shown[0]}/>
-        <Card number={numsForCards[1]} id={numsForCards[1]} action={() => onPressed(1)} show={shown[1]} />
-        <Card number={numsForCards[2]} id={numsForCards[2]} action={() => onPressed(2)} show={shown[2]} />
-        <Card number={numsForCards[3]} id={numsForCards[3]} action={() => onPressed(3)} show={shown[3]} />
-      </div>
 
-      <div className='rowTwo' >
-        <Card number={numsForCards[4]} id={numsForCards[4]} action={() => onPressed(4)} show={shown[4]} />
-        <Card number={numsForCards[5]} id={numsForCards[5]} action={() => onPressed(5)} show={shown[5]} />
-        <Card number={numsForCards[6]} id={numsForCards[6]} action={() => onPressed(6)} show={shown[6]} />
-        <Card number={numsForCards[7]} id={numsForCards[7]} action={() => onPressed(7)} show={shown[7]} />
+  if(!playerWon) {
+    return (
+      <div className="App">
+        <div className="Header">
+          <h1 className='title'>A picture is worth a thousand words, but a memory is priceless</h1>
+          <button className='buttonReset' onClick={onHandleReshuffle}>Reshuffle</button>
+        </div>
+        
+        <div className='rowOne'>
+          <Card number={numsForCards[0]} id={numsForCards[0]} action={() => onPressed(0)} show={shown[0]} touch={untouchable[0]}/>
+          <Card number={numsForCards[1]} id={numsForCards[1]} action={() => onPressed(1)} show={shown[1]} touch={untouchable[1]}/>
+          <Card number={numsForCards[2]} id={numsForCards[2]} action={() => onPressed(2)} show={shown[2]} touch={untouchable[2]}/>
+          <Card number={numsForCards[3]} id={numsForCards[3]} action={() => onPressed(3)} show={shown[3]} touch={untouchable[3]}/>
+        </div>
+  
+        <div className='rowTwo' >
+          <Card number={numsForCards[4]} id={numsForCards[4]} action={() => onPressed(4)} show={shown[4]} touch={untouchable[4]}/>
+          <Card number={numsForCards[5]} id={numsForCards[5]} action={() => onPressed(5)} show={shown[5]} touch={untouchable[5]}/>
+          <Card number={numsForCards[6]} id={numsForCards[6]} action={() => onPressed(6)} show={shown[6]} touch={untouchable[6]}/>
+          <Card number={numsForCards[7]} id={numsForCards[7]} action={() => onPressed(7)} show={shown[7]} touch={untouchable[7]}/>
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
+  else {
+    return (
+      <div className="App">
+        <div className="Header">
+          <h1 className='title'>A picture is worth a thousand words, but a memory is priceless</h1>
+          <button className='buttonReset' onClick={onHandleReshuffle}>Reshuffle</button>
+        </div>
+        
+        <p>You won the Game !!!!!!!!!!!!</p>
+      </div>
+    );
+  }
+  
 }
 
 export default App;

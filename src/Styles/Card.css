@@ -14,4 +14,12 @@
     text-align: center;
 }
 
+.Matched-Card {
+    background-color: yellow;
+    height: 80%;
+    width: 10%;
+    font-size: 5vw;
+    text-align: center;
+}
+
 

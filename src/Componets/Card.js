@@ -9,7 +9,14 @@ class Card extends React.Component {
     }
 
     render() {
-        if(this.props.show===false) {
+        if(this.props.touch===true) {
+            return (
+                <div className='Matched-Card' onClick={this.props.action}>
+                    <p>#{this.props.number}</p>
+                </div>
+            );
+        }
+        else if(this.props.show===false) {
             return (
                 <div className="Hidden" onClick={this.props.action}>
                     <p></p>

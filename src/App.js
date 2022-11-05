@@ -8,13 +8,19 @@ function App() {
 
   // State for whether the cards should be shown
   const [shown, setShown]=useState([false,false,false,false,false,false,false,false]);
+
+  // State for cards that are untouchable because the user selected them and they are matching 
+  const [untouchable, setCanNotTouch]=useState([false,false,false,false,false,false,false,false]);
+
   const [numChosen, setNumChosen]=useState(0);
   const [playerWon, setWon]=useState(false);
+
 
   // State for saving the chosen cards used later for comparing them 
   const [cardOne, setCardOne]=useState(-1);
   const [cardTwo, setCardTwo]=useState(-1);
 
+  // Reset the Game Function Handler 
   function onHandleReshuffle() {
     // Randomize with Math random method
     const randomizeCard=[...numsForCards].sort(()=> Math.random() -0.5);
@@ -22,6 +28,7 @@ function App() {
 
     // Need to cover all the cards when reshuffling is needed
     setShown([false,false,false,false,false,false,false,false]);
+    setCanNotTouch([false,false,false,false,false,false,false,false]);
 
     // Reset game state
     setNumChosen(0);
@@ -32,14 +39,14 @@ function App() {
 
   // Function to deal with when card is pressed and pass into the Card componet as a prop
   function onPressed(id) {
-    if(shown[id]===false && numChosen<2) {
+    if(shown[id]===false && numChosen<2 && untouchable[id]===false) {
       const newShown=[...shown];
       newShown[id]=!newShown[id];
       setShown(newShown);
       setNumChosen(prevNumber=> prevNumber+1);
       cardOne>-1 ? setCardTwo(id) : setCardOne(id);
     }
-    else if(shown[id]===true) {
+    else if(shown[id]===true && untouchable[id]===false) {
       const newShown=[...shown];
       newShown[id]=!newShown[id];
       setShown(newShown);
@@ -57,9 +64,16 @@ function App() {
           // They are matching 
           if(numsForCards[cardOne]===numsForCards[cardTwo]){
             console.log(numsForCards[cardOne],"===",numsForCards[cardTwo]);
+            // Make the matching cards untouchable 
+            const newUnTouch=[...untouchable];
+            newUnTouch[cardOne]=true;
+            newUnTouch[cardTwo]=true;
+            setCanNotTouch(newUnTouch);
+
             setNumChosen(0);
             setCardOne(-1);
             setCardTwo(-1);
+            
           }
           else  { // no match 
             // Reset the cards here have to add a delay here 

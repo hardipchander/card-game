@@ -5,9 +5,15 @@ import Card from './Componets/Card';
 function App() {
   // Add state for storing information about the game with use state hook
   const [numsForCards, setCards]=useState([1,2,3,4,1,2,3,4].sort(()=> Math.random() -0.5));
+
+  // State for whether the cards should be shown
   const [shown, setShown]=useState([false,false,false,false,false,false,false,false]);
   const [numChosen, setNumChosen]=useState(0);
   const [playerWon, setWon]=useState(false);
+
+  // State for saving the chosen cards used later for comparing them 
+  const [cardOne, setCardOne]=useState(-1);
+  const [cardTwo, setCardTwo]=useState(-1);
 
   function onHandleReshuffle() {
     // Randomize with Math random method
@@ -20,6 +26,8 @@ function App() {
     // Reset game state
     setNumChosen(0);
     setWon(false);
+    setCardOne(-1);
+    setCardTwo(-1);
   }
 
   // Function to deal with when card is pressed and pass into the Card componet as a prop
@@ -29,19 +37,42 @@ function App() {
       newShown[id]=!newShown[id];
       setShown(newShown);
       setNumChosen(prevNumber=> prevNumber+1);
+      cardOne>-1 ? setCardTwo(id) : setCardOne(id);
     }
     else if(shown[id]===true) {
       const newShown=[...shown];
       newShown[id]=!newShown[id];
       setShown(newShown);
       setNumChosen(prevNumber=> prevNumber-1);
+      
     }
     
   }
 
+  // Use this for comparing cards
   useEffect(function() {
     if(numChosen===2) {
-      console.log("Have a match")
+      // Time to compare the cards
+      if(cardOne>-1 && cardTwo>-1) {
+          // They are matching 
+          if(numsForCards[cardOne]===numsForCards[cardTwo]){
+            console.log(numsForCards[cardOne],"===",numsForCards[cardTwo]);
+            setNumChosen(0);
+            setCardOne(-1);
+            setCardTwo(-1);
+          }
+          else  { // no match 
+            // Reset the cards here have to add a delay here 
+            setNumChosen(0);
+            setCardOne(-1);
+            setCardTwo(-1);
+            const newShown=[...shown];
+            newShown[cardOne]=false;
+            newShown[cardTwo]=false;
+            setShown(newShown);
+          }
+      }
+      
     }
   }, [numChosen])
 

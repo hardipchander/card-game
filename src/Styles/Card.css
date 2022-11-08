@@ -10,6 +10,10 @@
 
 .Hidden  {
     background-color: black;
+    background-image: url('../imgs/cardBack.png');
+    background-size: contain;
+    background-size: cover;
+    background-repeat: no-repeat;
     height: 80%;
     width: 10%;
     font-size: 5vw;
@@ -19,7 +23,7 @@
 }
 
 .Matched-Card {
-    background-color: yellow;
+    background-color: rgba(0,110,230,0.5);
     height: 80%;
     width: 10%;
     font-size: 5vw;

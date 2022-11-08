@@ -1,6 +1,7 @@
 import './App.css';
 import { useState, useEffect } from 'react';
 import Card from './Componets/Card';
+import winner from './imgs/winner.png';
 
 function App() {
   // Add state for storing information about the game with use state hook
@@ -130,8 +131,17 @@ function App() {
           <h1 className='title'>A picture is worth a thousand words, but a memory is priceless</h1>
           <button className='buttonReset' onClick={onHandleReshuffle}>New Game</button>
         </div>
-        
-        <p>You won the Game !!!!!!!!!!!!</p>
+
+        <div className='Win-Screen'>
+          <p>You won the Game !</p>
+          <img  src={winner} className='winner'/>
+          <div className='loadingBar'>
+            <div className='box'>
+
+            </div>
+          </div>
+        </div>
+
       </div>
     );
   }

@@ -1,5 +1,5 @@
 .App {
-  background-color: dodgerblue;
+  background-color: #005000; 
   color:white;
   height: 100vh;
   width: 100vw;
@@ -20,18 +20,20 @@
 .buttonReset {
   cursor: pointer;
   outline: none;
-  background-color: green;
+  background-color: #006ee6;
   height: 30%;
   width: 8%;
   color: white;
   font-size: 1vw;
   font-weight: bold;
   border-radius: 10px;
-  border: 2px solid green;
+  border: 2px solid #006ee6;
   box-shadow: 0 0 10px rgba(0,0,0,0.1); 
 }
 
 .buttonReset:hover, .buttonReset:active {
+  background-color: #0055b3;
+  border: 2px solid #0055b3;
   box-shadow: 0 0 20px rgba(0,0,0,0.5); 
 }
 
@@ -52,4 +54,56 @@
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
+}
+
+.Win-Screen {
+  height: 70vh;
+  width: 100vw;
+  background-color: #0055b3;
+  text-align: center;
+  font-size: 2vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.loadingBar{
+  height: 20%;
+  width: 50%;
+  background-color: black;
+  border-radius: 20px;
+}
+
+.box {
+  height: 100%;
+  width: 10%;
+  background-image: url('./imgs/cardBack.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  border-radius: 10px;
+}
+
+.loadingBar .box {
+  animation: movement 1s ease-in forwards infinite;
+}
+
+@keyframes movement {
+  0% {
+    transform: translateX(0);
+  }
+
+  100%{
+    transform: translateX(920%);
+  }
+}
+
+p {
+  margin-bottom: 0;
+}
+
+.winner {
+  height: 60%;
+  width: 20%;
+  border: 3px solid darkred;
 }

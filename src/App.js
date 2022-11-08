@@ -61,7 +61,8 @@ function App() {
     // Check if all cards are untouchable meaning the user has won 
     if(untouchable[0]===true && untouchable[1]===true && untouchable[2]===true && untouchable[3]===true && untouchable[4]===true && untouchable[5]===true && untouchable[6]===true && untouchable[7]===true) {
       console.log("Player has won");
-      setWon(true);
+      // Add Delay here right before the player wins the game for 1 second (1000 milliseconds)
+      setTimeout(()=>{setWon(true);}, 1000); 
     }
     if(numChosen===2) {
       // Time to compare the cards
@@ -81,14 +82,16 @@ function App() {
             
           }
           else  { // no match 
-            // Reset the cards here have to add a delay here 
-            setNumChosen(0);
-            setCardOne(-1);
-            setCardTwo(-1);
-            const newShown=[...shown];
-            newShown[cardOne]=false;
-            newShown[cardTwo]=false;
-            setShown(newShown);
+            // Reset the cards here have to add a delay here use setTimeout function 
+            setTimeout(()=> {
+              setNumChosen(0);
+              setCardOne(-1);
+              setCardTwo(-1);
+              const newShown=[...shown];
+              newShown[cardOne]=false;
+              newShown[cardTwo]=false;
+              setShown(newShown);
+            },800);
           }
       }
       
@@ -125,7 +128,7 @@ function App() {
       <div className="App">
         <div className="Header">
           <h1 className='title'>A picture is worth a thousand words, but a memory is priceless</h1>
-          <button className='buttonReset' onClick={onHandleReshuffle}>Reshuffle</button>
+          <button className='buttonReset' onClick={onHandleReshuffle}>New Game</button>
         </div>
         
         <p>You won the Game !!!!!!!!!!!!</p>

@@ -38,7 +38,6 @@
 .rowOne {
   height: 35vh;
   width: 100vw;
-  background-color: blue;
   margin-bottom: 5vh;
   display: flex;
   flex-direction: row;
@@ -47,7 +46,6 @@
 }
 
 .rowTwo {
-  background-color: green;
   height: 33vh;
   width: 100vw;
   display: flex;

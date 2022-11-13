@@ -4,6 +4,10 @@ import Card from './Componets/Card';
 import winner from './imgs/winner.png';
 
 function App() {
+
+  // Add State for when the game first starts for the first time
+  const [gameStarted, setGameStarted]=useState(false);
+
   // Add state for storing information about the game with use state hook
   const [numsForCards, setCards]=useState([1,2,3,4,1,2,3,4].sort(()=> Math.random() -0.5));
 
@@ -23,6 +27,12 @@ function App() {
 
   // Reset the Game Function Handler 
   function onHandleReshuffle() {
+    console.log("new game pressed");
+
+    if(gameStarted===false) {
+      setGameStarted(true);
+    }
+
     // Randomize with Math random method
     const randomizeCard=[...numsForCards].sort(()=> Math.random() -0.5);
     setCards(randomizeCard);
@@ -36,6 +46,7 @@ function App() {
     setWon(false);
     setCardOne(-1);
     setCardTwo(-1);
+
   }
 
   // Function to deal with when card is pressed and pass into the Card componet as a prop
@@ -59,9 +70,9 @@ function App() {
 
   // Use this for comparing cards
   useEffect(function() {
-    // Check if all cards are untouchable meaning the user has won 
+    // Check if all cards are untouchable meaning they are all matched and the user has won 
     if(untouchable[0]===true && untouchable[1]===true && untouchable[2]===true && untouchable[3]===true && untouchable[4]===true && untouchable[5]===true && untouchable[6]===true && untouchable[7]===true) {
-      console.log("Player has won");
+      
       // Add Delay here right before the player wins the game for 1 second (1000 milliseconds)
       setTimeout(()=>{setWon(true);}, 1000); 
     }
@@ -70,7 +81,6 @@ function App() {
       if(cardOne>-1 && cardTwo>-1) {
           // They are matching 
           if(numsForCards[cardOne]===numsForCards[cardTwo]){
-            console.log(numsForCards[cardOne],"===",numsForCards[cardTwo]);
             // Make the matching cards untouchable 
             const newUnTouch=[...untouchable];
             newUnTouch[cardOne]=true;
@@ -99,13 +109,23 @@ function App() {
     }
   }, [numChosen])
 
-
-  if(!playerWon) {
+  // The intial screen right when the user starts up the game 
+  if(!playerWon && gameStarted===false) {
+    return (
+      <div className="App">
+          <div className="Header">
+            <h1 className='title'>A picture is worth a thousand words, but a memory is priceless</h1>
+            <button className='buttonReset' onClick={onHandleReshuffle}>New Game</button>
+          </div>
+        </div>
+    );
+  }
+  else if(!playerWon && gameStarted===true) {
     return (
       <div className="App">
         <div className="Header">
           <h1 className='title'>A picture is worth a thousand words, but a memory is priceless</h1>
-          <button className='buttonReset' onClick={onHandleReshuffle}>Reshuffle</button>
+          <button className='buttonReset' onClick={onHandleReshuffle}>New Game</button>
         </div>
         
         <div className='rowOne'>
@@ -124,7 +144,7 @@ function App() {
       </div>
     );
   }
-  else {
+  else if(playerWon===true && gameStarted===true) {
     return (
       <div className="App">
         <div className="Header">

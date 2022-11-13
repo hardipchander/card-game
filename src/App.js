@@ -27,8 +27,6 @@ function App() {
 
   // Reset the Game Function Handler 
   function onHandleReshuffle() {
-    console.log("new game pressed");
-
     if(gameStarted===false) {
       setGameStarted(true);
     }
